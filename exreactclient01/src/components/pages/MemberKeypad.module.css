@@ -1,0 +1,23 @@
+.keypad {
+  justify-content: center;
+}
+
+.flexKeypad {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
