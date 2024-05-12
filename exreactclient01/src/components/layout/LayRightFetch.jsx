@@ -18,7 +18,10 @@ function LayRightFetch({ inputValue }) {
 
   useEffect(() => {
     // 입력된 값의 길이가 4 이상인 경우에만 fetchMemberData 함수 실행
+    console.log('------------LayRignt')
     if (inputValue.length >= 4) {
+
+      console.log('-----------fetchMemberData-----------')
       fetchMemberData();
     }
   }, [inputValue]);// useEffect의 의존성 배열에 clickMemberNum을 추가합니다.
@@ -50,6 +53,7 @@ function LayRightFetch({ inputValue }) {
   return (
     <div>
       <MemberData memberData={memberData} />
+      <MemberData />
     </div>
 
   );
