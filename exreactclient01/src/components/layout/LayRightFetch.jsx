@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import LayLeft from './LayLeft';
+
 import MemberData from '../pages/MemberData';
 // MemberKeypad는 주석 처리되어 있으므로 필요 없는 import문은 삭제합니다.
 
@@ -53,7 +53,7 @@ function LayRightFetch({ inputValue }) {
   return (
     <div>
       <MemberData memberData={memberData} />
-      <MemberData />
+      <MemberData memberData={memberData} />
     </div>
 
   );

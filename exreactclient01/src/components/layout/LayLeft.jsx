@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MemberData from '../pages/MemberData';
+import LayLeftMember from './LayLeftMember';
 
 function LayLeft() {
 
@@ -7,6 +8,7 @@ function LayLeft() {
 
   return (
     <>
+      <LayLeftMember />
       <MemberData />
     </>
   );
