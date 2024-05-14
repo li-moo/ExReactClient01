@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import style from './MemberKeypad.module.css';
 import LayRightFetch from '../layout/LayRightFetch';
+import Actions from '../states/Actions';
+import { fetchMemberData, fetchMemberDataSuccess } from '../states/Actions';
+
 
 const MemberKeypad = () => {
   const [inputValue, setInputValue] = useState(''); // 현재 입력된 숫자를 저장하는 상태
@@ -83,6 +86,8 @@ const MemberKeypad = () => {
       </div >
       {/* <LayRightFetch {...inputValue} /> */}
       <LayRightFetch inputValue={inputValue} />
+      {/* <MemberState inputValue={inputValue} /> */}
+      <Actions inputValue={inputValue} />
 
     </>
   );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MemberData from '../pages/MemberData';
 import LayLeftMember from './LayLeftMember';
+import MemberState from '../states/MemberState';
+import ReduxFetch from '../pages/ReduxFetch';
 
 function LayLeft() {
 
@@ -8,8 +10,10 @@ function LayLeft() {
 
   return (
     <>
-      <LayLeftMember />
-      <MemberData />
+      {/* <LayLeftMember />
+      <MemberData /> */}
+      <MemberState />
+      <ReduxFetch />
     </>
   );
 }
