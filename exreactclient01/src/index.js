@@ -1,33 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { Provider } from 'react-redux';
-import Store from './components/states/Store';
-import { createStore, applyMiddleware } from 'redux';
-import Reducer from './components/states/Reducers'; // 가정
-
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={Store}>
+  <RecoilRoot>
+  <React.StrictMode>
     <App />
-  </Provider>,
+  </React.StrictMode>
+</RecoilRoot>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
 
 // // If you want to start measuring performance in your app, pass a function
 // // to log results (for example: reportWebVitals(console.log))

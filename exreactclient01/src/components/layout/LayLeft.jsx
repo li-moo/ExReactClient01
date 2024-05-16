@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import MemberData from '../pages/MemberData';
-import LayLeftMember from './LayLeftMember';
-import MemberState from '../states/MemberState';
-import ReduxFetch from '../pages/ReduxFetch';
+import { memberState } from '../state/memberState';
+import { useRecoilValue } from 'recoil';
 
 function LayLeft() {
+
+  const memberData = useRecoilValue(memberState);
+
+  useEffect(() => {
+
+  }, [memberData])
+
+  console.log(memberData)
 
 
 
   return (
     <>
-      {/* <LayLeftMember />
-      <MemberData /> */}
-      <MemberState />
-      <ReduxFetch />
+      <p>{memberData.name}</p>
+      <div>
+        {memberData && Object.keys(memberData).length !== 0 && (
+          <button>출석</button>
+        )}
+      </div>
     </>
   );
 }

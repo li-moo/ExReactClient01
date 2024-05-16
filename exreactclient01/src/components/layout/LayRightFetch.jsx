@@ -1,60 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { memberState } from '../state/memberState';
+import { memberNumberState } from '../state/memberNumberState';
+import { useRecoilState, useRecoilValueLoadable, useRecoilValue } from 'recoil';
 
-import MemberData from '../pages/MemberData';
-import MemberState from '../states/MemberState';
-// MemberKeypad는 주석 처리되어 있으므로 필요 없는 import문은 삭제합니다.
+export function LayRightFetch({ inputValue }) {
+  const [memberData, setMemberData] = useRecoilState(memberState);
+  const memberNumberData = useRecoilValue(memberNumberState);
 
-function LayRightFetch({ inputValue }) {
-
-  // console.log('1clickMemberNum' + inputValue);
-  // console.log('clickMemberNum.inputValue' + clickMemberNum.inputValue);
+  // const initialMemberDataLoadable = useRecoilValueLoadable(memberState);
   // useEffect(() => {
-  //   // 함수 호출 시 괄호를 사용하지 않고 변수를 참조합니다.
-  //   console.log("inputValue이 변경되었습니다.");
-  //   // readMemberNum 함수는 여기서 호출하지 않습니다.
-  //   fetchMemberData();
+  //   if (initialMemberDataLoadable.state === 'hasValue' && initialMemberDataLoadable.contents === null) {
+  //     setMemberData(null);
+  //   }
+  // }, [initialMemberDataLoadable.state, initialMemberDataLoadable.contents, setMemberData]);
 
-  // }, [inputValue]); // useEffect의 의존성 배열에 clickMemberNum을 추가합니다.
+  console.log('memberNumberData:::', memberNumberData)
 
   useEffect(() => {
-    // 입력된 값의 길이가 4 이상인 경우에만 fetchMemberData 함수 실행
-    console.log('------------LayRignt')
     if (inputValue.length >= 4) {
-
-      console.log('-----------fetchMemberData-----------')
       fetchMemberData();
     }
-  }, [inputValue]);// useEffect의 의존성 배열에 clickMemberNum을 추가합니다.
+    if (inputValue.length === 3) {
+      setMemberData({}); // inputValue의 길이가 3일 때, 빈 객체로 Recoil 상태를 업데이트
+    }
+  }, [inputValue, setMemberData]);
 
 
-  const [memberData, setMemberData] = useState(null);
   const url_be = 'http://localhost:4000';
 
   const fetchMemberData = () => {
-    // member_number 값을 지정하여 `/member` 엔드포인트에서 데이터 가져오기
-    const memberNumber = inputValue; // 예시로 123 사용. 실제로는 원하는 값을 넣어야 함
-    console.log('fetch안--', memberNumber);
+
+    const memberNumber = memberNumberData;
+    console.log('fetch안--', memberNumberData);
     axios.get(`${url_be}/member`, {
       params: {
-        // member_number: memberNumber
         member_number: memberNumber
       }
     })
       .then((res) => {
-        console.log("Member Data:", res.data);
-
-        setMemberData(res.data);
+        // console.log("Member Data:", res.data);
+        const member = res.data;
+        console.log('member:' + member);
+        setMemberData({
+          ...memberData,
+          isAttendance: true,
+          id: member.id,
+          name: member.name,
+          member_number: member.member_number,
+          car_number: member.car_number,
+          member_img: member.member_img,
+          isParking: false
+        })
       })
-      .catch((err) => console.log("member data 오류:", err));
+      .catch((err) => {
+        console.log("member data 오류:", err);
+        setMemberData({});
+      })
   };
-
-
 
   return (
     <div>
-      <MemberData memberData={memberData} />
-      <MemberState memberData={memberData} />
     </div>
 
   );
