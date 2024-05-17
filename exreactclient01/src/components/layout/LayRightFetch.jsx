@@ -38,10 +38,41 @@ export function LayRightFetch({ inputValue }) {
         member_number: memberNumber
       }
     })
+      // .then((res) => {
+      //   // console.log("Member Data:", res.data);
+      //   const member = res.data;
+
+      //   console.log('member:' + member);
+      //   setMemberData({
+      //     ...memberData,
+      //     isAttendance: true,
+      //     id: member.id,
+      //     name: member.name,
+      //     member_number: member.member_number,
+      //     car_number: member.car_number,
+      //     member_img: member.member_img,
+      //     isParking: false,
+      //     inProgress: 
+      //   })
+      // })
       .then((res) => {
-        // console.log("Member Data:", res.data);
         const member = res.data;
-        console.log('member:' + member);
+
+        // 회원의 두 번째 멤버십 기간
+        const secondMembershipPeriod = member.second_membership_period;
+
+        // 현재 날짜와 두 번째 멤버십 기간 비교
+        const currentDate = new Date();
+        const todayString = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 현재 날짜 문자열 생성
+
+        const isPastDate = secondMembershipPeriod < todayString;
+
+        // inProgress 값 설정
+        const inProgress = !isPastDate;
+
+        console.log('member:', member);
+        console.log('inProgress:', inProgress);
+
         setMemberData({
           ...memberData,
           isAttendance: true,
@@ -50,8 +81,9 @@ export function LayRightFetch({ inputValue }) {
           member_number: member.member_number,
           car_number: member.car_number,
           member_img: member.member_img,
-          isParking: false
-        })
+          isParking: false,
+          inProgress: inProgress
+        });
       })
       .catch((err) => {
         console.log("member data 오류:", err);

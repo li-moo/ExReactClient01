@@ -12,7 +12,8 @@ export const memberState = atom({
     member_number: '',
     car_number: '',
     member_img: '',
-    isParking: false
+    isParking: false,
+    inProgress: true
   },
   effects_UNSTABLE: [persistAtom]
 });
