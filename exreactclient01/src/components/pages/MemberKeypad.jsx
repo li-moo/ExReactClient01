@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from './MemberKeypad.module.css';
-import LayRightFetch from '../layout/LayRightFetch';
+import MemberFetch from '../layout/fetch/MemberFetch';
 import { memberNumberState } from '../state/memberNumberState';
 import { useRecoilState } from 'recoil';
 
@@ -98,7 +98,7 @@ const MemberKeypad = () => {
         </div>
       </div >
       {/* <LayRightFetch {...inputValue} /> */}
-      <LayRightFetch inputValue={inputValue} />
+      <MemberFetch inputValue={inputValue} />
 
     </>
   );

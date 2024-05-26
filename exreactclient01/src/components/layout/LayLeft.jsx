@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { memberState } from '../state/memberState';
 import { useRecoilValue } from 'recoil';
+import AttendanceFetch from './fetch/AttendanceFetch';
+import ParkingFetch from './fetch/ParkingFetch';
 
 function LayLeft() {
 
@@ -19,9 +21,12 @@ function LayLeft() {
       <p>{memberData.name}</p>
       <div>
         {memberData && Object.keys(memberData).length !== 0 && (
-          <button>출석</button>
+          <AttendanceFetch />
         )}
+        <ParkingFetch />
       </div>
+
+
     </>
   );
 }
