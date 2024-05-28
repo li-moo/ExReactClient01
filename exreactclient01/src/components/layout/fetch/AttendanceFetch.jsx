@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { memberState } from '../../state/memberState';
 import { inTimeState } from '../../state/inTimeState';
 import { useRecoilValue, useRecoilState } from 'recoil';
@@ -14,6 +14,10 @@ function AttendanceFetch() {
   const url_be = 'http://localhost:4000';
 
   const fetchAttendance = () => {
+
+    console.log('axios전', memberData);
+
+    setInTimeData(null);
     axios
       (`${url_be}/attendance`,
         {

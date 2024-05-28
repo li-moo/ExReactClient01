@@ -1,23 +1,56 @@
+.box {
+  background: #f0f0f0;
+  /* 배경색 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+    /* 아래 그림자 */
+    0 6px 6px rgba(0, 0, 0, 0.1);
+  /* 윗쪽 그림자 */
+  border: 2px solid #ddd;
+  /* 테두리 */
+}
+
 .keypad {
   justify-content: center;
 }
 
 .flexKeypad {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
 }
 
 
 .button {
-  padding: 10px 20px;
-  margin: 5px;
-  background-color: #3498db;
+  width: 80px;
+  height: 80px;
+  padding: 8px;
+  margin: 3px;
+  background-color: #262626;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .button:hover {
-  background-color: #2980b9;
+  background-color: #000000;
+}
+
+
+.numberBox {
+  height: 90px;
+  font-size: 70px;
+  color: #5c5c5c;
+  padding-inline-start: 10px;
+}
+
+.inputLine {
+  border-bottom: 2px solid #cacaca;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: 10px;
 }

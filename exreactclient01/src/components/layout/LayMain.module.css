@@ -14,4 +14,6 @@
 .layRightStyle {
   width: 40%;
   background-color: rgb(226, 221, 121);
+  display: grid;
+  justify-content: center;
 }

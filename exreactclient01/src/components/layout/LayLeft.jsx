@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { memberState } from '../state/memberState';
+import { inTimeState } from '../state/inTimeState';
 import { useRecoilValue } from 'recoil';
 import AttendanceFetch from './fetch/AttendanceFetch';
 import ParkingFetch from './fetch/ParkingFetch';
@@ -7,26 +8,27 @@ import ParkingFetch from './fetch/ParkingFetch';
 function LayLeft() {
 
   const memberData = useRecoilValue(memberState);
+  const inTimeData = useRecoilValue(inTimeState);
 
   useEffect(() => {
+    // console.log('－memberData.isAttendance:', memberData.isAttendance)
+    // console.log('－memberData.isAttendance:', memberData ? memberData.isAttendance : 'undefined');
+    // console.log('－memberData 조건:', memberData && Object.keys(memberData).length !== 0 && memberData !== undefined);
+
 
   }, [memberData])
-
-  console.log(memberData)
 
 
 
   return (
     <>
-      <p>{memberData.name}</p>
+      <p>{memberData ? memberData.name : null}</p>
+      <p>{memberData ? memberData.member_number : null}</p>
       <div>
-        {memberData && Object.keys(memberData).length !== 0 && (
-          <AttendanceFetch />
+        {memberData && Object.keys(memberData).length !== 0 && memberData !== undefined && (
+          memberData.isAttendance ? <AttendanceFetch /> : <ParkingFetch />
         )}
-        <ParkingFetch />
       </div>
-
-
     </>
   );
 }

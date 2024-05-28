@@ -18,6 +18,8 @@ export function LayRightFetch({ inputValue }) {
   console.log('memberNumberData:::', memberNumberData)
 
   useEffect(() => {
+    setMemberData(null)
+
     if (inputValue.length >= 4) {
       fetchMemberData();
     }
@@ -52,7 +54,6 @@ export function LayRightFetch({ inputValue }) {
 
         setMemberData({
           ...memberData,
-          isAttendance: true,
           id: member.id,
           name: member.name,
           member_number: member.member_number,
@@ -62,11 +63,16 @@ export function LayRightFetch({ inputValue }) {
           inProgress: inProgress
         });
       })
+      .then(() => {
+        console.log(memberData);
+      })
       .catch((err) => {
         console.log("member data 오류:", err);
         setMemberData({});
       })
   };
+
+  console.log("11", memberData);
 
   return (
     <div>
