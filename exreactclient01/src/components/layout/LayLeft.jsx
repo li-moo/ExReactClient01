@@ -25,9 +25,9 @@ function LayLeft() {
       <p>{memberData ? memberData.name : null}</p>
       <p>{memberData ? memberData.member_number : null}</p>
       <div>
-        {memberData && Object.keys(memberData).length !== 0 && memberData !== undefined && (
-          memberData.isAttendance ? <AttendanceFetch /> : <ParkingFetch />
-        )}
+        {memberData && !memberData.isAttendance && memberData.member_number && memberData.member_number.length >= 4 && <AttendanceFetch />}
+        {memberData && !inTimeData.isRegister && memberData.member_number && memberData.member_number.length >= 4 && <ParkingFetch />}
+
       </div>
     </>
   );

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react'
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { inTimeState } from '../../state/inTimeState';
 import { memberState } from '../../state/memberState';
 import axios from 'axios';
@@ -7,6 +7,8 @@ import axios from 'axios';
 function ParkingFetch() {
   const memberResData = useRecoilValue(memberState);
   const inTimeData = useRecoilValue(inTimeState);
+  const [resInTimeState, setResInTimeState] = useRecoilState(inTimeState);
+  const [resMemberResData, setResMemberResData] = useRecoilState(inTimeState);
 
   const parkingOutTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
 
@@ -42,6 +44,13 @@ console.log(parts); // 출력: ["21", "15", "34"] */
 
   const parkingTime = getTime(inTimeData.in_time, parkingOutTime, 20);
 
+  useEffect(() => {
+    if (resInTimeState.isRegister) {
+      alert("안녕히가세요");
+      // memberResData와 inTimeData를 빈 객체로 초기화
+    }
+  }, [resInTimeState.isRegister, setResInTimeState, setResMemberResData]);
+
   // fetch
   const url_be = 'http://localhost:4000';
   const fetchParkingData = () => {
@@ -64,10 +73,18 @@ console.log(parts); // 출력: ["21", "15", "34"] */
     })
       .then((res) => {
         if (res !== null && res !== "") {
+          setResInTimeState({
+            ...resInTimeState,
+            isRegister: true
+          })
           console.log("주차등록");
         } else {
           console.log("주차등록실패");
         }
+      })
+      .then(() => {
+        setResMemberResData({});
+        setResInTimeState({});
       })
       .catch(function (error) {
         if (error.response) {
@@ -78,9 +95,53 @@ console.log(parts); // 출력: ["21", "15", "34"] */
       });
   };
 
+  const fetchExitData = () => {
+
+    axios.post(`${url_be}/parking`, {
+      member_number: memberResData.member_number,
+      car_number: memberResData.car_number,
+      out_time: parkingOutTime,
+      parking_time: parkingTime
+    }, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        withCredentials: true,
+        mode: 'no-cors'
+      }
+    })
+      .then((res) => {
+        if (res !== null && res !== "") {
+          setResInTimeState({
+            ...resInTimeState,
+            isRegister: true
+          })
+          console.log("주차등록");
+        } else {
+          console.log("주차등록실패");
+        }
+      })
+      .then(() => {
+        setResMemberResData({});
+        setResInTimeState({});
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.respon1se.status);
+          console.log(error.response.headers);
+        }
+      });
+  };
+
+
   return (
     <div>
-      <button onClick={fetchParkingData}>퇴장</button>
+      {memberResData && memberResData.car_number ? (
+        <button onClick={fetchParkingData}>주차</button>
+      ) : (
+        <button onClick={fetchExitData}>퇴실</button>
+      )}
     </div>
   );
 }

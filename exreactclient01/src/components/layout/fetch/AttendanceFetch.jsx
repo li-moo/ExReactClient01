@@ -10,6 +10,11 @@ function AttendanceFetch() {
   const [memberData, setMemberData] = useRecoilState(memberState);
   const [inTimeData, setInTimeData] = useRecoilState(inTimeState);
   const attendanceInTime = new Date().toLocaleTimeString('en-GB', { hour12: false });
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayDate = `${year}-${month}-${day}`;
 
   const url_be = 'http://localhost:4000';
 
@@ -38,6 +43,7 @@ function AttendanceFetch() {
           setMemberData({
             ...memberData,
             isAttendance: true,
+            client_date: todayDate
           })
           setInTimeData({
             ...inTimeData,
