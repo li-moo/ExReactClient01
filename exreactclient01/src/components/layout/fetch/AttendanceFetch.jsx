@@ -65,8 +65,6 @@ function AttendanceFetch() {
       })
   };
 
-
-  console.log(memberData)
   return (
     <button onClick={fetchAttendance}>출석</button>
 

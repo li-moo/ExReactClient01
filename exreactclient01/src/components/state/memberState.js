@@ -13,6 +13,8 @@ export const memberState = atom({
     car_number: '',
     member_img: '',
     isParking: false,
+    first_membership_period: '',
+    second_membership_period: '',
     inProgress: true,
     client_date: ''
   },

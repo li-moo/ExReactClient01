@@ -28,6 +28,11 @@ export function LayRightFetch({ inputValue }) {
     }
   }, [inputValue, setMemberData]);
 
+  // period 자르는 함수 2024-08-16T15:00:00.000Z 출력되는 date를 
+  // 10번째 글자수로 잘라서 2024-08-16으로 출력
+  const slicePeriod = (date) => {
+    return date.substring(0, 10);
+  };
 
   const url_be = 'http://localhost:4000';
 
@@ -51,6 +56,7 @@ export function LayRightFetch({ inputValue }) {
 
         // inProgress 값 설정
         const inProgress = !isPastDate;
+        console.log('멤버 데이터가 뭔데?', member);
 
         setMemberData({
           ...memberData,
@@ -60,11 +66,15 @@ export function LayRightFetch({ inputValue }) {
           car_number: member.car_number,
           member_img: member.member_img,
           isParking: false,
+          first_membership_period: slicePeriod(member.first_membership_period),
+          second_membership_period: slicePeriod(member.second_membership_period),
           inProgress: inProgress
         });
       })
       .then(() => {
         console.log(memberData);
+        console.log("::있어라", memberData.first_membership_period);
+
       })
       .catch((err) => {
         console.log("member data 오류:", err);
