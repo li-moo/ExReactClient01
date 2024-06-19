@@ -4,6 +4,7 @@ import { inTimeState } from '../state/inTimeState';
 import { useRecoilValue } from 'recoil';
 import AttendanceFetch from './fetch/AttendanceFetch';
 import ParkingFetch from './fetch/ParkingFetch';
+import MemberInfo from '../pages/MemberInfo';
 import style from './LayLeft.module.css'
 
 function LayLeft() {
@@ -16,13 +17,13 @@ function LayLeft() {
     // console.log('－memberData.isAttendance:', memberData ? memberData.isAttendance : 'undefined');
     // console.log('－memberData 조건:', memberData && Object.keys(memberData).length !== 0 && memberData !== undefined);
 
-
   }, [memberData])
 
 
 
   return (
     <>
+      {(!memberData || Object.keys(memberData).length === 0) && <MemberInfo />}
       {memberData && memberData.name && (
         <div className={style.layLeft01}>
           {memberData.member_number && memberData.member_number.length >= 4 ? (
@@ -42,7 +43,7 @@ function LayLeft() {
               <p>{memberData.first_membership_period}</p>
               <p>{memberData.second_membership_period}</p>
               {!memberData.isAttendance && memberData.member_number && memberData.member_number.length >= 4 && <AttendanceFetch />}
-              {!inTimeData.isRegister && memberData.member_number && memberData.member_number.length >= 4 && <ParkingFetch />}
+              {inTimeData && !inTimeData.isRegister && memberData.member_number && memberData.member_number.length >= 4 && <ParkingFetch />}
             </div>
           </div>
         </div>

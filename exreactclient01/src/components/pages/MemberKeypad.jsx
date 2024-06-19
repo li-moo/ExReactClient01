@@ -75,7 +75,7 @@ const MemberKeypad = () => {
               </button>
             ))}
           </div>
-          <div className={style.flexKeypad}>
+          <div className={style.flexKeypadV2}>
             {/* C, 0, - 버튼 */}
             {['C', 0, '-'].map((buttonValue) => (
               <button

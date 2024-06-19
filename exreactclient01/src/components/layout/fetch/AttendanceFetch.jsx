@@ -50,10 +50,12 @@ function AttendanceFetch() {
             in_time: attendanceInTime
           })
           console.log("출석");
-
+          alert(`안녕하세요 ${memberData.name}님`);
+          window.location.reload();
         } else {
           console.log("실패");
-
+          alert("다시 시도해주세요");
+          window.location.reload();
         }
       })
       .catch(function (error) {

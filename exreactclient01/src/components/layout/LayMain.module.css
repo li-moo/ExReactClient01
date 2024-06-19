@@ -8,12 +8,12 @@
 
 .layLeftStyle {
   width: 60%;
-  background-color: rgb(158, 136, 223);
+  background-color: rgb(239, 239, 239);
 }
 
 .layRightStyle {
   width: 40%;
-  background-color: rgb(226, 221, 121);
+  background-color: rgb(239, 239, 239);
   display: grid;
   justify-content: center;
 }

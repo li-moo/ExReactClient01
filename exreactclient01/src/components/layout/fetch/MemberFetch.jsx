@@ -68,7 +68,8 @@ export function LayRightFetch({ inputValue }) {
           isParking: false,
           first_membership_period: slicePeriod(member.first_membership_period),
           second_membership_period: slicePeriod(member.second_membership_period),
-          inProgress: inProgress
+          inProgress: inProgress,
+          in_time: member.in_time
         });
       })
       .then(() => {

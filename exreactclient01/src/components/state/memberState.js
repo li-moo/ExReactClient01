@@ -16,7 +16,9 @@ export const memberState = atom({
     first_membership_period: '',
     second_membership_period: '',
     inProgress: true,
-    client_date: ''
+    client_date: '',
+    in_time: ''
+
   },
   effects_UNSTABLE: [persistAtom]
 });
