@@ -16,7 +16,8 @@ function AttendanceFetch() {
   const day = String(today.getDate()).padStart(2, '0');
   const todayDate = `${year}-${month}-${day}`;
 
-  const url_be = 'http://localhost:4000';
+  // const url_be = 'http://localhost:4000';
+  const url_be = 'http://15.164.140.169:4000';
 
   const fetchAttendance = () => {
 

@@ -195,7 +195,9 @@ function ParkingFetch() {
     }
   }, [resInTimeState, setResInTimeState, setResMemberResData]);
 
-  const url_be = 'http://localhost:4000';
+  // const url_be = 'http://localhost:4000';
+  const url_be = 'http://15.164.140.169:4000';
+
   const fetchParkingData = () => {
     console.log('inTimeData', inTimeData);
     console.log('parkingOutTime', parkingOutTime);
